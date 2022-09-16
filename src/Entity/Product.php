@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Table(name: 'app_product')]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
