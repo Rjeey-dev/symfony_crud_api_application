@@ -1,7 +1,8 @@
-controllers:
-    resource: ../src/Controller/
-    type: annotation
+customer_list:
+    path: /
+    controller: App\Controller\CustomerController::indexAction
 
-kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+
+customer_create:
+    path: /
+    controller: App\Controller\CustomerController:createAction
