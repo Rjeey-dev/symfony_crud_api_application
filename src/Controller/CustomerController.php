@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 class CustomerController extends AbstractApiController
 {
     public function __construct(private ManagerRegistry $doctrine) {}
@@ -17,27 +18,22 @@ class CustomerController extends AbstractApiController
     public function indexAction(Request $request): Response
     {
         $customers = $this->doctrine->getRepository(Customer::class)->findAll();
-
         return $this->json($customers);
     }
 
-    public function createAction(ManagerRegistry $doctrine,Request $request)
+    public function createAction(Request $request): Response
     {
         $form = $this->buildForm(CustomerType::class);
         $form->handleRequest($request);
 
-        if (!$form->isSubmitted()) {
-            // throw exception
-            print 'Error';
-            exit();
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
 
         /** @var Customer $customer*/
         $customer = $form->getData();
-
         $this->doctrine->getManager()->persist($customer);
         $this->doctrine->getManager()->flush();
-
-        return $this->json('');
+        return $this->respond($customer);
     }
 }

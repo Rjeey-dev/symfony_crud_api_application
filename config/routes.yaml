@@ -1,8 +1,4 @@
-customer_list:
-    path: /
-    controller: App\Controller\CustomerController::indexAction
-
 
 customer_create:
     path: /
-    controller: App\Controller\CustomerController:createAction
+    controller: App\Controller\CustomerController::createAction
