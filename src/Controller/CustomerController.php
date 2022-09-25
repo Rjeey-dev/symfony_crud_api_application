@@ -9,12 +9,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 
 class CustomerController extends AbstractApiController
 {
     public function __construct(private ManagerRegistry $doctrine) {}
 
+    #[Route(
+        '/api/v1/customers',
+        name: 'some_name',
+        condition: "service('some_service').someMethod()",
+    )]
     public function indexAction(Request $request): Response
     {
         $customers = $this->doctrine->getRepository(Customer::class)->findAll();
