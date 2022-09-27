@@ -7,3 +7,13 @@ customer_create:
     path: /api/v1/customers
     controller: App\Controller\CustomerController:createAction
     methods: [POST]
+
+products_list:
+    path: /api/v1/products
+    controller: App\Controller\ProductController:indexAction
+    methods: [ GET ]
+
+products_create:
+    path: /api/v1/products
+    controller: App\Controller\ProductController:createAction
+    methods: [ POST ]
